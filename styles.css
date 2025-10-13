@@ -578,7 +578,7 @@ body::before{
   transition: width .9s cubic-bezier(.22,.61,.36,1);
 }
 
-/* Projects grid reused from your card look */
+
 .proj-grid{
   display:grid; gap:16px;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -664,7 +664,6 @@ a:hover::after { right:0; }
   --surface:#ffffff;
   --surface-2:#635656;
 
-  /* Keep your sizing tokens */
   --wrap: 980px;
   --radius: 14px;
   --h1: clamp(22px, 3.2vw, 34px);

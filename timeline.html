@@ -204,12 +204,12 @@
     <a href= "https://ksuweb.github.io/IT3203/"> <small><b>This is a class project developed in IT 3203.</b></small></a>
   </footer>
 
-  <!-- Animated GPU cursor -->
+ 
   <div id="gpuCursor" aria-hidden="true"></div>
 
   <!-- Same tiny script as index -->
   <script>
-  // ===== Menu (unchanged) =====
+ 
   const btn = document.getElementById('menuBtn');
   const panel = document.getElementById('menuPanel');
   function closeMenu(){ panel.classList.remove('menu--open'); btn.setAttribute('aria-expanded','false'); }
@@ -220,7 +220,7 @@
   document.addEventListener('click', e => { if(!panel.contains(e.target) && !btn.contains(e.target)) closeMenu(); });
   document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
 
-  // ===== Cursor follower (unchanged) =====
+ 
   const gpu = document.getElementById('gpuCursor');
   let raf;
   window.addEventListener('mousemove', e => {
@@ -234,7 +234,7 @@
   document.addEventListener('focusin',  e => { if(e.target.matches(hoverSel)) setHover(true); });
   document.addEventListener('focusout', e => { if(e.target.matches(hoverSel)) setHover(false); });
 
-  // ===== Timeline scroll-reveal (fallback: no IntersectionObserver needed) =====
+  // ===== Timeline scroll-reveal  =====
   (function(){
     const items = Array.from(document.querySelectorAll('.tl__item'));
     if(!items.length) return;
@@ -261,7 +261,7 @@
     window.addEventListener('resize', revealCheck, {passive:true});
     window.addEventListener('load', revealCheck);
 
-    // Extra safety ticks (handles fonts/images shifting layout)
+   
     setTimeout(revealCheck, 80);
     setTimeout(revealCheck, 250);
     setTimeout(revealCheck, 600);
@@ -269,7 +269,7 @@
 </script>
 
 <script>
-  // ===== A) GPU Glow: update CSS vars from cursor (works with your cursor code) =====
+  // ===== A) GPU Glow: =====
   (function(){
     const root = document.documentElement;
     let raf;
