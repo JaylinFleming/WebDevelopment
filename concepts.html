@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jaylin’s Car Mod Lab — Home</title>
+
+  <!-- Shared stylesheet (single CSS file requirement) -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Google Font for a clean feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Simple loader audio (muted autoplay; user can enable) -->
+  <!-- Note: Many browsers block autoplay with sound. We start muted and offer a toggle. -->
+</head>
+<body data-page="home">
+  <!-- Loader: “tool booting up” screen -->
+  <div id="loader" aria-live="polite" role="status">
+    <div class="loader-card">
+      <div class="loader-title">JARVIS Sentry — Toolchain</div>
+      <div class="loader-sub">Initializing mods suite…</div>
+      <div class="progress-track" aria-label="Loading progress">
+        <div class="progress-bar"></div>
+      </div>
+      <div class="loader-steps">
+        <span data-badge="1">Diagnostics</span>
+        <span data-badge="2">Sensors</span>
+        <span data-badge="3">Aero</span>
+        <span data-badge="4">ECU</span>
+      </div>
+      <button id="enterSite" class="btn">Enter Garage</button>
+      <button id="toggleSound" class="btn btn-ghost" aria-pressed="false">Enable Sound</button>
+    </div>
+  </div>
+
+  <audio id="bg-audio" src="assets/garage-ambience.mp3" preload="auto" loop muted></audio>
+
+  <!-- Header / Nav (consistent on every page) -->
+  <header class="site-header">
+    <div class="brand">
+      <span class="logo">JL</span>
+      <span class="brand-text">Jaylin’s Car Mod Lab</span>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="mods.html">Visual Mods</a>
+      <a href="tuning.html">Performance & Tuning</a>
+      <a href="concepts.html">Key Concepts</a>
+      <a href="references.html">References</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Welcome to the Garage</h1>
+        <p class="lead">
+          I document the mods I love, how I plan them, and what they cost.
+          This site evolves as I build, learn, and test.
+        </p>
+        <ul class="key-terms">
+          <li><strong>Aero</strong></li>
+          <li><strong>Fitment</strong></li>
+          <li><strong>ECU Tune</strong></li>
+          <li><strong>Brake Upgrades</strong></li>
+          <li><strong>Weight Reduction</strong></li>
+        </ul>
+      </div>
+      <div class="hero-media">
+        <img src="assets/hero.jpg" alt="Side profile of a modified car in a studio light" />
+      </div>
+    </section>
+
+    <!-- Table of Contents linking to other pages -->
+    <section>
+      <h2>Table of Contents</h2>
+      <div class="cards grid-3">
+        <a class="card" href="mods.html">
+          <h3>Visual Mods</h3>
+          <p>Bumpers, diffusers, wraps, wheels, lighting and more.</p>
+        </a>
+        <a class="card" href="tuning.html">
+          <h3>Performance & Tuning</h3>
+          <p>Brakes, suspension, ECU maps, aero balance, and testing.</p>
+        </a>
+        <a class="card" href="concepts.html">
+          <h3>Key Concepts</h3>
+          <p>5–7 core ideas to understand before wrenching.</p>
+        </a>
+        <a class="card" href="references.html">
+          <h3>References & Resources</h3>
+          <p>Solid tutorials, communities, and tools I trust.</p>
+        </a>
+        <a class="card" href="about.html">
+          <h3>About</h3>
+          <p>Who I am, what this project is, and how to reach me.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Simple image + caption list to satisfy lists/images criteria -->
+    <section>
+      <h2>Featured Build: Model Y Performance</h2>
+      <figure class="feature">
+        <img src="assets/y-model.jpg" alt="Model Y Performance in a matte wrap" />
+        <figcaption>Daily driver, track-curious. Targeting balanced street/track setup.</figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Class project for <a href="https://ksuweb.github.io/IT3203/" target="_blank" rel="noopener">IT 3203</a>. © <span id="year"></span> Jaylin Fleming.</p>
+  </footer>
+
+  <script>
+    // --- Loader logic (hide after user clicks "Enter Garage" OR after 2.5s) ---
+    const loader = document.getElementById('loader');
+    const enterBtn = document.getElementById('enterSite');
+    const audio = document.getElementById('bg-audio');
+    const toggleSound = document.getElementById('toggleSound');
+
+    // Auto-fade after a short delay, but keep button for instant skip
+    const autoHide = setTimeout(() => loader.classList.add('hide'), 2500);
+
+    enterBtn.addEventListener('click', () => {
+      clearTimeout(autoHide);
+      loader.classList.add('hide');
+    });
+
+    // Sound toggle (starts muted for autoplay compatibility)
+    toggleSound.addEventListener('click', async (e) => {
+      try {
+        if (audio.muted) {
+          audio.muted = false;
+          await audio.play();
+          e.target.setAttribute('aria-pressed', 'true');
+          e.target.textContent = 'Disable Sound';
+        } else {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.muted = true;
+          e.target.setAttribute('aria-pressed', 'false');
+          e.target.textContent = 'Enable Sound';
+        }
+      } catch (err) {
+        console.log('Audio play blocked:', err);
+      }
+    });
+
+    // Little touch: current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

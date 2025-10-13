@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GPU Evolution Timeline</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="gpu-cursor">
+  <a class="sr-only" href="#main">Skip to content</a>
+
+  <!-- Top bar (same as index) -->
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel" aria-label="Open site menu">
+      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <h1 class="page-title">GPU: Through the years</h1>
+    <div class="topbar__spacer" aria-hidden="true"></div>
+
+    <nav id="menuPanel" class="menu" aria-label="Site">
+      <a href="index.html" class="menu__link">Home</a>
+      <a href="timeline.html" class="menu__link" aria-current="page">Timeline</a>
+      <a href="applications.html" class="menu__link">Applications</a>
+      <a href="concepts.html" class="menu__link">Key Concepts</a>
+      <a href="about.html" class="menu__link">About</a>
+      <a href="references.html" class="menu__link">References</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <h2 class="section-title">TIMELINE</h2>
+
+    <section class="tl" aria-label="GPU milestones">
+      <article class="tl__item tl__item--left">
+        <div class="tl__dot" aria-hidden="true"></div>
+        <div class="tl__card">
+          <h3 class="tl__year">1995</h3>
+          <h4 class="tl__title">3dfx Voodoo Graphics</h4>
+          <p>The Voodoo card marked the first major leap in consumer 3D acceleration and popularized dedicated graphics add-in boards.</p>
+        </div>
+      </article>
+
+      <article class="tl__item tl__item--right">
+        <div class="tl__dot" aria-hidden="true"></div>
+        <div class="tl__card">
+          <h3 class="tl__year">1999</h3>
+          <h4 class="tl__title">NVIDIA GeForce 256</h4>
+          <p>Coined the term “GPU” and brought hardware transform &amp; lighting, reshaping real-time 3D rendering.</p>
+        </div>
+      </article>
+
+      <article class="tl__item tl__item--left">
+        <div class="tl__dot" aria-hidden="true"></div>
+        <div class="tl__card">
+          <h3 class="tl__year">2006</h3>
+          <h4 class="tl__title">CUDA</h4>
+          <p>Enabled general-purpose compute on GPUs, paving the way for acceleration in AI, simulation, and data analytics.</p>
+        </div>
+      </article>
+
+      <article class="tl__item tl__item--right">
+        <div class="tl__dot" aria-hidden="true"></div>
+        <div class="tl__card">
+          <h3 class="tl__year">2010's</h3>
+          <h4 class="tl__title">Rise of GPU</h4>
+          <p>GPUs moved beyond graphics into scientific research, crypto mining, and large-scale machine learning.</p>
+        </div>
+      </article>
+
+      <article class="tl__item tl__item--left">
+        <div class="tl__dot" aria-hidden="true"></div>
+        <div class="tl__card">
+          <h3 class="tl__year">2020's</h3>
+          <h4 class="tl__title">AI Era</h4>
+          <p>Modern GPUs (e.g., RTX &amp; RDNA families) power gaming realism and the training/inference of cutting-edge AI systems.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>
+      <b>This is a class project developed in IT 1103.</b>
+    </small>
+  </footer>
+
+  <!-- Animated GPU cursor -->
+  <div id="gpuCursor" aria-hidden="true"></div>
+
+  <!-- Same tiny script as index -->
+  <script>
+    // Menu
+    const btn = document.getElementById('menuBtn');
+    const panel = document.getElementById('menuPanel');
+    function closeMenu(){ panel.classList.remove('menu--open'); btn.setAttribute('aria-expanded','false'); }
+    btn.addEventListener('click', () => {
+      const open = panel.classList.toggle('menu--open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', e => { if(!panel.contains(e.target) && !btn.contains(e.target)) closeMenu(); });
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
+
+    // Cursor
+    const gpu = document.getElementById('gpuCursor');
+    let raf;
+    window.addEventListener('mousemove', e => {
+      if(raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => { gpu.style.left = e.clientX+'px'; gpu.style.top = e.clientY+'px'; });
+    }, {passive:true});
+    const hoverSel = 'a,button,.menu-btn,.menu__link';
+    const setHover = on => document.body.classList.toggle('cursor-hover', on);
+    document.addEventListener('pointerover', e => { if(e.target.closest(hoverSel)) setHover(true); });
+    document.addEventListener('pointerout',  e => { if(e.target.closest(hoverSel)) setHover(false); });
+    document.addEventListener('focusin',  e => { if(e.target.matches(hoverSel)) setHover(true); });
+    document.addEventListener('focusout', e => { if(e.target.matches(hoverSel)) setHover(false); });
+  </script>
+</body>
+</html>

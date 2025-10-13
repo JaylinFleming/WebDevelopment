@@ -1,12 +1,94 @@
-<!DOCTYPE html>
-<html>  
-    <head> 
-    <title> "Assignment0" </title>
-    </head>
-    </html>
-    <body>
-        <h1> This is Assignment0</h1>
-        <p> This is my first paragraph in my first assignment! </p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jaylin's Project</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="gpu-cursor">
 
+
+<!--Cursor-->
+
+
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel" aria-label="Open site menu">
+      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <h1 class="page-title">History of Graphics Card (Graphics Processing Unit)</h1>
+
+
+    <div class="topbar__spacer" aria-hidden="true"></div>
+
+    <!-- Dropdown menu -->
+    <nav id="menuPanel" class="menu" aria-label="Site">
+      <a href="index.html" class="menu__link" aria-current="page">Home</a>
+      <a href="timeline.html" class="menu__link">Timeline</a>
+      <a href="applications.html" class="menu__link">Applications</a>
+      <a href="concepts.html" class="menu__link">Key Concepts</a>
+      <a href="about.html" class="menu__link">About</a>
+      <a href="references.html" class="menu__link">References</a>
+    </nav>
+  </header>
+
+  <main id="main" class="content">
+    <section class="overview" aria-labelledby="ov-title">
+      <h2 id="ov-title" class="section-titsle">Introduction</h2>
+
+      <div class="text-col">
+        <p class="lead">
+          A Graphics Processing Unit (GPU) is a specialized electronic circuit designed to accelerate the processing of images and videos for display on a computer screen. Unlike a Central Processing Unit (CPU), which is optimized for general-purpose computing tasks, a GPU is specifically engineered to handle the complex mathematical calculations required for rendering graphics.
+        </p>
+      </div>
+
+      <figure class="hero-figure">
+        <img src="images/gpu outline.jpg" alt="Stylized illustration of a GPU board" loading="lazy" decoding="async">
+        <figcaption class="sr-only">Placeholder image – swap this later.</figcaption>
+      </figure>
+    </section>
+ 
+  </main>
+
+  <footer class="site-footer">
+    <small>
+      <b>This is a class project developed in  IT 1103.</b>
+      
+  </footer>
+
+  <div id="gpuCursor" aria-hidden="true"></div>
+
+
+
+  <script>
+
+    const btn = document.getElementById('menuBtn');
+    const panel = document.getElementById('menuPanel');
+    function closeMenu(){ panel.classList.remove('menu--open'); btn.setAttribute('aria-expanded','false'); }
+    function toggleMenu(){
+      const open = panel.classList.toggle('menu--open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    btn.addEventListener('click', toggleMenu);
+    document.addEventListener('click', (e)=>{ if(!panel.contains(e.target) && !btn.contains(e.target)) closeMenu(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
+
+    const gpu = document.getElementById('gpuCursor');
+    let rafId;
+    function move(e){
+      if(!gpu) return;
+      const x=e.clientX, y=e.clientY;
+      if(rafId) cancelAnimationFrame(rafId);
+      rafId=requestAnimationFrame(()=>{ gpu.style.left=x+'px'; gpu.style.top=y+'px'; });
+    }
+    window.addEventListener('mousemove', move, {passive:true});
+    
+  
+  </script>
+  
 </body>
+
 </html>
