@@ -3,155 +3,339 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jaylin’s Car Mod Lab — Home</title>
-
-  <!-- Shared stylesheet (single CSS file requirement) -->
+  <title>Concepts- GPU Key Concepts</title>
   <link rel="stylesheet" href="styles.css" />
-
-  <!-- Google Font for a clean feel -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
-  <!-- Simple loader audio (muted autoplay; user can enable) -->
-  <!-- Note: Many browsers block autoplay with sound. We start muted and offer a toggle. -->
 </head>
-<body data-page="home">
-  <!-- Loader: “tool booting up” screen -->
-  <div id="loader" aria-live="polite" role="status">
-    <div class="loader-card">
-      <div class="loader-title">JARVIS Sentry — Toolchain</div>
-      <div class="loader-sub">Initializing mods suite…</div>
-      <div class="progress-track" aria-label="Loading progress">
-        <div class="progress-bar"></div>
-      </div>
-      <div class="loader-steps">
-        <span data-badge="1">Diagnostics</span>
-        <span data-badge="2">Sensors</span>
-        <span data-badge="3">Aero</span>
-        <span data-badge="4">ECU</span>
-      </div>
-      <button id="enterSite" class="btn">Enter Garage</button>
-      <button id="toggleSound" class="btn btn-ghost" aria-pressed="false">Enable Sound</button>
-    </div>
-  </div>
+<body class="gpu-cursor">
+  <!-- Top Bar -->
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel" aria-label="Open site menu">
+      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
 
-  <audio id="bg-audio" src="assets/garage-ambience.mp3" preload="auto" loop muted></audio>
+    <h1 class="page-title" style = "text-shadow: #000000;">Key Concepts: Understanding GPUs</h1>
+    <div class="topbar__spacer" aria-hidden="true"></div>
 
-  <!-- Header / Nav (consistent on every page) -->
-  <header class="site-header">
-    <div class="brand">
-      <span class="logo">JL</span>
-      <span class="brand-text">Jaylin’s Car Mod Lab</span>
-    </div>
-    <nav class="main-nav">
-      <a href="index.html" class="active">Home</a>
-      <a href="mods.html">Visual Mods</a>
-      <a href="tuning.html">Performance & Tuning</a>
-      <a href="concepts.html">Key Concepts</a>
-      <a href="references.html">References</a>
-      <a href="about.html">About</a>
+    <nav id="menuPanel" class="menu" aria-label="Site">
+      <a href="index.html" class="menu__link">Home</a>
+      <a href="timeline.html" class="menu__link">Timeline</a>
+      <a href="concepts.html" class="menu__link" aria-current="page">Key Concepts</a>
+      <a href="about.html" class="menu__link">About</a>
+      <a href="references.html" class="menu__link">References</a>
     </nav>
   </header>
 
-  <main class="container">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-text">
-        <h1>Welcome to the Garage</h1>
-        <p class="lead">
-          I document the mods I love, how I plan them, and what they cost.
-          This site evolves as I build, learn, and test.
+  <main id="main" class="wrap">
+    <!-- Parallax/gradient headline band -->
+    <section class="concepts-hero" aria-labelledby="kc-title">
+      <div class="concepts-hero__bg" aria-hidden="true"></div>
+      <h2 id="kc-title" class="section-title concepts-hero__title">
+        Key Concepts Behind GPU Technology
+      </h2>
+      <p class="concepts-hero__lead">
+        A quick primer on the ideas that make GPUs incredibly fast for graphics, AI, and simulation.
+      </p>
+
+      <!-- Quick filter -->
+      <div class="concepts-filter" role="group" aria-label="Filter concepts">
+        <button class="chip is-active" data-filter="all">All</button>
+        <button class="chip" data-filter="compute">Compute</button>
+        <button class="chip" data-filter="graphics">Graphics</button>
+        <button class="chip" data-filter="memory">Memory</button>
+        <button class="chip" data-filter="ai">AI</button>
+        <button class="chip" data-filter="system">System</button>
+      </div>
+    </section>
+
+    <!-- Grid of concept cards -->
+    <section class="concepts-grid">
+      <article class="card reveal" data-tags="compute">
+        <h3>1. Parallel Processing</h3>
+        <p>
+          The GPU is composed of numerous lightweight cores, which can perform numerous operations simultaneously, making it perfect for tasks like rendering, simulation, and ML workloads.
         </p>
-        <ul class="key-terms">
-          <li><strong>Aero</strong></li>
-          <li><strong>Fitment</strong></li>
-          <li><strong>ECU Tune</strong></li>
-          <li><strong>Brake Upgrades</strong></li>
-          <li><strong>Weight Reduction</strong></li>
-        </ul>
-      </div>
-      <div class="hero-media">
-        <img src="assets/hero.jpg" alt="Side profile of a modified car in a studio light" />
-      </div>
+      </article>
+
+      <article class="card reveal" data-tags="graphics">
+        <h3>2. Shaders & the Pipeline</h3>
+        <p>
+          Geometry turns pixel as it passes through the graphics pipeline, while the programmable shaders simulate the real-time lighting, color and effects.
+        </p>
+      </article>
+
+      <article class="card reveal" data-tags="compute ai">
+        <h3>3. CUDA & OpenCL</h3>
+        <p>
+          In the simplest terms: the frameworks that allow non-graphical computing runs on GPU. Powers AI, analytics, scientific computing, and research.
+        </p>
+      </article>
+
+      <article class="card reveal" data-tags="memory system">
+        <h3>4. Memory Bandwidth</h3>
+        <p>
+          High-speed memory (GDDR6/HBM) feeds the cores. Bandwidth and locality often decide real-world performance.
+        </p>
+      </article>
+
+      <article class="card reveal" data-tags="graphics">
+        <h3>5. Ray Tracing</h3>
+        <p>
+          Simulates light paths to produce realistic shadows and reflections; very compute-intensive and well-suited to GPU hardware.
+        </p>
+      </article>
+
+      <article class="card reveal" data-tags="ai compute">
+        <h3>6. Deep Learning Acceleration</h3>
+        <p>
+          Specialized units (e.g., Tensor Cores) accelerate matrix math for faster training and inference of neural networks.
+        </p>
+      </article>
+
+      <article class="card reveal" data-tags="system">
+        <h3>7. Power & Cooling</h3>
+        <p>
+          Thermal design, power delivery, and architecture efficiency keep performance high while managing heat and noise.
+        </p>
+      </article>
     </section>
 
-    <!-- Table of Contents linking to other pages -->
-    <section>
-      <h2>Table of Contents</h2>
-      <div class="cards grid-3">
-        <a class="card" href="mods.html">
-          <h3>Visual Mods</h3>
-          <p>Bumpers, diffusers, wraps, wheels, lighting and more.</p>
-        </a>
-        <a class="card" href="tuning.html">
-          <h3>Performance & Tuning</h3>
-          <p>Brakes, suspension, ECU maps, aero balance, and testing.</p>
-        </a>
-        <a class="card" href="concepts.html">
-          <h3>Key Concepts</h3>
-          <p>5–7 core ideas to understand before wrenching.</p>
-        </a>
-        <a class="card" href="references.html">
-          <h3>References & Resources</h3>
-          <p>Solid tutorials, communities, and tools I trust.</p>
-        </a>
-        <a class="card" href="about.html">
-          <h3>About</h3>
-          <p>Who I am, what this project is, and how to reach me.</p>
-        </a>
-      </div>
-    </section>
-
-    <!-- Simple image + caption list to satisfy lists/images criteria -->
-    <section>
-      <h2>Featured Build: Model Y Performance</h2>
-      <figure class="feature">
-        <img src="assets/y-model.jpg" alt="Model Y Performance in a matte wrap" />
-        <figcaption>Daily driver, track-curious. Targeting balanced street/track setup.</figcaption>
-      </figure>
-    </section>
+  
   </main>
 
   <footer class="site-footer">
-    <p>Class project for <a href="https://ksuweb.github.io/IT3203/" target="_blank" rel="noopener">IT 3203</a>. © <span id="year"></span> Jaylin Fleming.</p>
+    <a href="https://ksuweb.github.io/IT3203/">
+      <small><b>This is a class project developed in IT 3203.</b></small>
+    </a>
   </footer>
 
+  <div id="gpuCursor" aria-hidden="true"></div>
+
   <script>
-    // --- Loader logic (hide after user clicks "Enter Garage" OR after 2.5s) ---
-    const loader = document.getElementById('loader');
-    const enterBtn = document.getElementById('enterSite');
-    const audio = document.getElementById('bg-audio');
-    const toggleSound = document.getElementById('toggleSound');
-
-    // Auto-fade after a short delay, but keep button for instant skip
-    const autoHide = setTimeout(() => loader.classList.add('hide'), 2500);
-
-    enterBtn.addEventListener('click', () => {
-      clearTimeout(autoHide);
-      loader.classList.add('hide');
+    // ===== Menu =====
+    const btn = document.getElementById('menuBtn');
+    const panel = document.getElementById('menuPanel');
+    const closeMenu = () => { panel.classList.remove('menu--open'); btn.setAttribute('aria-expanded','false'); };
+    btn.addEventListener('click', () => {
+      const open = panel.classList.toggle('menu--open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
+    document.addEventListener('click', e => { if(!panel.contains(e.target) && !btn.contains(e.target)) closeMenu(); });
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
 
-    // Sound toggle (starts muted for autoplay compatibility)
-    toggleSound.addEventListener('click', async (e) => {
-      try {
-        if (audio.muted) {
-          audio.muted = false;
-          await audio.play();
-          e.target.setAttribute('aria-pressed', 'true');
-          e.target.textContent = 'Disable Sound';
-        } else {
-          audio.pause();
-          audio.currentTime = 0;
-          audio.muted = true;
-          e.target.setAttribute('aria-pressed', 'false');
-          e.target.textContent = 'Enable Sound';
-        }
-      } catch (err) {
-        console.log('Audio play blocked:', err);
+    // ===== Cursor follower =====
+    const gpu = document.getElementById('gpuCursor');
+    let raf;
+    window.addEventListener('mousemove', e => {
+      if(raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => { gpu.style.left = e.clientX+'px'; gpu.style.top = e.clientY+'px'; });
+    }, {passive:true});
+
+    // ===== Parallax headline (very subtle, Apple-y) =====
+    (function(){
+      const hero = document.querySelector('.concepts-hero__title');
+      const lead = document.querySelector('.concepts-hero__lead');
+      if (!hero) return;
+      const onScroll = () => {
+        const y = window.scrollY || document.documentElement.scrollTop;
+        hero.style.transform = `translateY(${Math.min(18, y*0.08)}px)`;
+        if (lead) lead.style.opacity = String(Math.max(0, 1 - y*0.0025));
+      };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+    })();
+
+    // ===== Card tilt on hover (pointer-move) =====
+    (function(){
+      const cards = document.querySelectorAll('.card');
+      const max = 8; // degrees
+      cards.forEach(card => {
+        let hover = false;
+        card.addEventListener('pointerenter', () => { hover = true; card.style.willChange = 'transform'; });
+        card.addEventListener('pointerleave', () => {
+          hover = false; card.style.transform = 'perspective(800px) rotateX(0) rotateY(0)';
+          card.style.willChange = 'auto';
+        });
+        card.addEventListener('pointermove', e => {
+          if (!hover) return;
+          const r = card.getBoundingClientRect();
+          const cx = r.left + r.width/2;
+          const cy = r.top + r.height/2;
+          const dx = (e.clientX - cx) / (r.width/2);
+          const dy = (e.clientY - cy) / (r.height/2);
+          const rx = (-dy * max).toFixed(2);
+          const ry = ( dx * max).toFixed(2);
+          card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+        });
+      });
+      // Respect reduced motion
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        cards.forEach(c => c.style.transform = 'none');
       }
-    });
+    })();
 
-    // Little touch: current year in footer
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    // ===== Scroll reveal for cards =====
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      if (!els.length) return;
+
+      // Start hidden only after JS is ready
+      document.body.classList.add('reveal-ready');
+
+      function showOnScroll(){
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const threshold = vh * 0.9;
+        els.forEach(el => {
+          if (el.classList.contains('is-visible')) return;
+          const r = el.getBoundingClientRect();
+          if (r.top < threshold && r.bottom > 0) el.classList.add('is-visible');
+        });
+      }
+      showOnScroll();
+      window.addEventListener('scroll', showOnScroll, {passive:true});
+      window.addEventListener('resize', showOnScroll, {passive:true});
+      setTimeout(showOnScroll, 120);
+      setTimeout(showOnScroll, 400);
+    })();
+
+    // ===== Quick filter chips =====
+    (function(){
+      const chips = document.querySelectorAll('.chip');
+      const cards = document.querySelectorAll('.card');
+      if (!chips.length) return;
+
+      function apply(filter){
+        cards.forEach(card => {
+          const tags = (card.getAttribute('data-tags') || '').split(/\s+/);
+          const show = filter === 'all' || tags.includes(filter);
+          card.style.display = show ? '' : 'none';
+        });
+      }
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chips.forEach(c => c.classList.remove('is-active'));
+          chip.classList.add('is-active');
+          apply(chip.dataset.filter);
+        });
+      });
+    })();
+
+   
+/* ============================
+   A) Smooth page transitions
+   ============================ */
+(function pageTransitions(){
+  const body = document.body;
+  // Enter transition
+  body.classList.add('page-enter');
+  requestAnimationFrame(() => {
+    body.classList.add('page-enter-active');
+    setTimeout(() => {
+      body.classList.remove('page-enter', 'page-enter-active');
+    }, 250);
+  });
+
+  // Exit transition on internal links
+  const isInternal = (a) => a.hostname === location.hostname && !a.hasAttribute('download') && a.getAttribute('target') !== '_blank';
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if(!a) return;
+    if (!isInternal(a)) return;
+    // let middle-click or modifier clicks pass through
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.hasAttribute('data-skip-transition')) return;
+
+    e.preventDefault();
+    const href = a.getAttribute('href');
+    // Start exit
+    body.classList.add('page-exit');
+    requestAnimationFrame(() => {
+      body.classList.add('page-exit-active');
+      setTimeout(() => { window.location.href = href; }, 220);
+    });
+  }, {capture:true});
+})();
+
+/* ===========================================
+   B) Timeline hover details (tooltips)
+   =========================================== */
+// Works on pages that have a .tl (timeline) with .tl__item elements.
+// Optional: add data-thumb="images/geforce256.jpg" and data-note="short note"
+(function timelineHover(){
+  if (matchMedia('(hover: none)').matches) return; // avoid on touch-only devices
+  const root = document.querySelector('.tl');
+  if(!root) return;
+
+  // Create floating tooltip once
+  const card = document.createElement('div');
+  card.className = 'tl-hover';
+  card.innerHTML = `
+    <img class="tl-hover__thumb" alt="">
+    <h4 class="tl-hover__title"></h4>
+    <p class="tl-hover__note"></p>
+  `;
+  document.body.appendChild(card);
+  const thumb = card.querySelector('.tl-hover__thumb');
+  const title = card.querySelector('.tl-hover__title');
+  const note  = card.querySelector('.tl-hover__note');
+
+  let raf, activeItem = null;
+
+  function showCard(item, x, y){
+    // Prefer data-*; fallback to content
+    const yearEl  = item.querySelector('.tl__year');
+    const titleEl = item.querySelector('.tl__title');
+    const pEl     = item.querySelector('.tl__card p');
+
+    title.textContent = (titleEl?.textContent || 'GPU Milestone') + (yearEl ? ` — ${yearEl.textContent}` : '');
+    note.textContent  = item.dataset.note || pEl?.textContent || '';
+
+    const src = item.dataset.thumb;
+    if (src) {
+      thumb.src = src;
+      thumb.style.display = 'block';
+    } else {
+      thumb.removeAttribute('src');
+      thumb.style.display = 'none';
+    }
+
+    card.style.display = 'block';
+    positionCard(x, y);
+  }
+
+  function hideCard(){
+    card.style.display = 'none';
+    activeItem = null;
+  }
+
+  function positionCard(x, y){
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const padding = 16;
+      let left = x, top = y - 12;
+      const rect = card.getBoundingClientRect();
+      // keep inside viewport
+      left = Math.max(padding + rect.width/2, Math.min(window.innerWidth - padding - rect.width/2, left));
+      top  = Math.max(padding + rect.height, Math.min(window.innerHeight - padding, top));
+      card.style.left = left + 'px';
+      card.style.top  = top + 'px';
+    });
+  }
+
+  root.addEventListener('mousemove', (e) => {
+    const item = e.target.closest('.tl__item');
+    if(!item) { hideCard(); return; }
+    if (activeItem !== item) {
+      activeItem = item;
+      showCard(item, e.clientX, e.clientY);
+    } else {
+      positionCard(e.clientX, e.clientY);
+    }
+  });
+
+  root.addEventListener('mouseleave', hideCard);
+})();
+</script>
+
 </body>
 </html>

@@ -9,9 +9,21 @@
 <body class="gpu-cursor">
 
 
-<!--Cursor-->
+  <!-- ===== SPLASH SCREEN ===== -->
+  <div id="splash" class="splash" aria-hidden="true">
+    <div class="splash__img"></div>
+    <div class="splash__center">
+      <h1 class="splash__title">History of GPUs</h1>
+      <p class="splash__tagline">Jaylin • Fleming • IT 3203</p>
+      <div class="splash__actions">
+        <button id="enterBtn" class="btn btn--primary">Enter site • <span class="btn__sub">with sound</span></button>
+        <button id="enterSilentBtn" class="btn btn--ghost">Enter without sound</button>
+      </div>
+    </div>
+    <button id="splashSkip" class="splash__skip" type="button">Skip</button>
+  </div>
 
-
+  <!-- ===== TOP BAR ===== -->
   <header class="topbar">
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel" aria-label="Open site menu">
       <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
@@ -19,76 +31,244 @@
       </svg>
     </button>
 
-    <h1 class="page-title">History of Graphics Card (Graphics Processing Unit)</h1>
+    <h1 class="page-title">History of Graphics Card (GPU)</h1>
 
+    <!-- Music toggle -->
+    <button id="audioToggle" class="audio-btn" aria-pressed="false" title="Play background music">♪</button>
 
-    <div class="topbar__spacer" aria-hidden="true"></div>
-
-    <!-- Dropdown menu -->
     <nav id="menuPanel" class="menu" aria-label="Site">
       <a href="index.html" class="menu__link" aria-current="page">Home</a>
       <a href="timeline.html" class="menu__link">Timeline</a>
-      <a href="applications.html" class="menu__link">Applications</a>
       <a href="concepts.html" class="menu__link">Key Concepts</a>
       <a href="about.html" class="menu__link">About</a>
       <a href="references.html" class="menu__link">References</a>
     </nav>
   </header>
+  
+
+  <!-- Background Music -->
+  <audio id="bgm" loop preload="auto" src="audio/ambient.mp3"></audio>
 
   <main id="main" class="content">
     <section class="overview" aria-labelledby="ov-title">
-      <h2 id="ov-title" class="section-titsle">Introduction</h2>
-
-      <div class="text-col">
-        <p class="lead">
-          A Graphics Processing Unit (GPU) is a specialized electronic circuit designed to accelerate the processing of images and videos for display on a computer screen. Unlike a Central Processing Unit (CPU), which is optimized for general-purpose computing tasks, a GPU is specifically engineered to handle the complex mathematical calculations required for rendering graphics.
+      <h2 id="ov-title" class="section-title">Introduction</h2>
+      <p class="body"
+         style = "text-align:center;letter-spacing: 0px;">A Graphical Processing Unit (GPU) is a specialized circuit designed to accelerate image and video processing for computer displays. 
+          Unlike CPUs, which handle general-purpose tasks, GPUs are optimized for parallel math operations that power gaming, rendering, and AI.
         </p>
-      </div>
+      <section class="wrap" aria-labelledby="gpu3d-title">
+  <h2 id="gpu3d-title" class="section-title">360 look</h2>
 
-      <figure class="hero-figure">
-        <img src="images/gpu outline.jpg" alt="Stylized illustration of a GPU board" loading="lazy" decoding="async">
-        <figcaption class="sr-only">Placeholder image – swap this later.</figcaption>
-      </figure>
+  <div class="skfb-wrap" >
+    
+    <iframe
+      title="GPU 3D model"
+      class="skfb"
+      src="https://sketchfab.com/models/e5c384afae914d548a591f722e1878fc/embed?autostart=1&dnt=1&ui_theme=dark&ui_controls=1&ui_infos=0&ui_watermark=0&preload=1&transparent=0"
+      allow="autoplay; fullscreen; xr-spatial-tracking; gyroscope; accelerometer"
+      xr-spatial-tracking
+      execution-while-out-of-viewport
+      execution-while-not-rendered
+      web-share
+    ></iframe><!-- Reactive lighting overlay -->
+<div class="lights" id="lights" aria-hidden="true"></div>
+
+  </div>
+
+  <p class="lead" style="text-align:center;max-width:62ch;margin:12px auto 0">
+    Drag to orbit • Scroll to zoom • Double-click to focus
+  </p>
+</section>
+
+
+     <!--(ADD GPU IMG) <figure class="gpu-figure">
+        <img src="images/gpu outline.jpg" alt="GPU illustration" loading="lazy">
+      </figure> --> 
     </section>
- 
   </main>
 
   <footer class="site-footer">
-    <small>
-      <b>This is a class project developed in  IT 1103.</b>
-      
+
+    <a href= "https://ksuweb.github.io/IT3203/"> <small><b>This is a class project developed in IT 3203.</b></small></a>
   </footer>
 
   <div id="gpuCursor" aria-hidden="true"></div>
 
-
-
   <script>
-
+    // ===== Menu Toggle =====
     const btn = document.getElementById('menuBtn');
     const panel = document.getElementById('menuPanel');
-    function closeMenu(){ panel.classList.remove('menu--open'); btn.setAttribute('aria-expanded','false'); }
-    function toggleMenu(){
+    const closeMenu = () => { panel.classList.remove('menu--open'); btn.setAttribute('aria-expanded','false'); };
+    btn.addEventListener('click', () => {
       const open = panel.classList.toggle('menu--open');
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    }
-    btn.addEventListener('click', toggleMenu);
-    document.addEventListener('click', (e)=>{ if(!panel.contains(e.target) && !btn.contains(e.target)) closeMenu(); });
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
+    });
+    document.addEventListener('click', e => { if(!panel.contains(e.target) && !btn.contains(e.target)) closeMenu(); });
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
 
+    // ===== Audio Logic =====
+    const audio = document.getElementById('bgm');
+    const audioToggle = document.getElementById('audioToggle');
+    let audioOn = false;
+    function playAudio() {
+      audio.volume = 0.2;
+      audio.play().then(() => {
+        audioOn = true;
+        audioToggle.setAttribute('aria-pressed', 'true');
+        audioToggle.classList.add('audio-btn--on');
+      }).catch(() => {});
+    }
+    function pauseAudio() {
+      audio.pause();
+      audioOn = false;
+      audioToggle.setAttribute('aria-pressed', 'false');
+      audioToggle.classList.remove('audio-btn--on');
+    }
+    audioToggle.addEventListener('click', () => { audioOn ? pauseAudio() : playAudio(); });
+
+    // ===== Splash Screen =====
+    const splash = document.getElementById('splash');
+    const enterBtn = document.getElementById('enterBtn');
+    const enterSilentBtn = document.getElementById('enterSilentBtn');
+    const splashSkip = document.getElementById('splashSkip');
+
+    function finishSplash(){
+      splash.classList.add('splash--out');
+      setTimeout(() => splash.remove(), 800);
+    }
+
+    enterBtn.addEventListener('click', () => { playAudio(); finishSplash(); });
+    enterSilentBtn.addEventListener('click', finishSplash);
+    splashSkip.addEventListener('click', finishSplash);
+
+    requestAnimationFrame(() => splash.classList.add('splash--in'));
+
+    // ===== GPU Cursor =====
     const gpu = document.getElementById('gpuCursor');
     let rafId;
-    function move(e){
-      if(!gpu) return;
-      const x=e.clientX, y=e.clientY;
+    window.addEventListener('mousemove', e => {
       if(rafId) cancelAnimationFrame(rafId);
-      rafId=requestAnimationFrame(()=>{ gpu.style.left=x+'px'; gpu.style.top=y+'px'; });
-    }
-    window.addEventListener('mousemove', move, {passive:true});
-    
-  
+      rafId = requestAnimationFrame(() => {
+        gpu.style.left = e.clientX + 'px';
+        gpu.style.top = e.clientY + 'px';
+      });
+    }, { passive: true });
   </script>
-  
-</body>
+  <script>
+/* ============================
+   A) Smooth page transitions
+   ============================ */
+(function pageTransitions(){
+  const body = document.body;
+  // Enter transition
+  body.classList.add('page-enter');
+  requestAnimationFrame(() => {
+    body.classList.add('page-enter-active');
+    setTimeout(() => {
+      body.classList.remove('page-enter', 'page-enter-active');
+    }, 250);
+  });
 
+  // Exit transition on internal links
+  const isInternal = (a) => a.hostname === location.hostname && !a.hasAttribute('download') && a.getAttribute('target') !== '_blank';
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if(!a) return;
+    if (!isInternal(a)) return;
+    // let middle-click or modifier clicks pass through
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.hasAttribute('data-skip-transition')) return;
+
+    e.preventDefault();
+    const href = a.getAttribute('href');
+    // Start exit
+    body.classList.add('page-exit');
+    requestAnimationFrame(() => {
+      body.classList.add('page-exit-active');
+      setTimeout(() => { window.location.href = href; }, 220);
+    });
+  }, {capture:true});
+})();
+
+/* ===========================================
+   B) Timeline hover details (tooltips)
+   =========================================== */
+// Works on pages that have a .tl (timeline) with .tl__item elements.
+// Optional: add data-thumb="images/geforce256.jpg" and data-note="short note"
+(function timelineHover(){
+  if (matchMedia('(hover: none)').matches) return; // avoid on touch-only devices
+  const root = document.querySelector('.tl');
+  if(!root) return;
+
+  // Create floating tooltip once
+  const card = document.createElement('div');
+  card.className = 'tl-hover';
+  card.innerHTML = `
+    <img class="tl-hover__thumb" alt="">
+    <h4 class="tl-hover__title"></h4>
+    <p class="tl-hover__note"></p>
+  `;
+  document.body.appendChild(card);
+  const thumb = card.querySelector('.tl-hover__thumb');
+  const title = card.querySelector('.tl-hover__title');
+  const note  = card.querySelector('.tl-hover__note');
+
+  let raf, activeItem = null;
+
+  function showCard(item, x, y){
+    // Prefer data-*; fallback to content
+    const yearEl  = item.querySelector('.tl__year');
+    const titleEl = item.querySelector('.tl__title');
+    const pEl     = item.querySelector('.tl__card p');
+
+    title.textContent = (titleEl?.textContent || 'GPU Milestone') + (yearEl ? ` — ${yearEl.textContent}` : '');
+    note.textContent  = item.dataset.note || pEl?.textContent || '';
+
+    const src = item.dataset.thumb;
+    if (src) {
+      thumb.src = src;
+      thumb.style.display = 'block';
+    } else {
+      thumb.removeAttribute('src');
+      thumb.style.display = 'none';
+    }
+
+    card.style.display = 'block';
+    positionCard(x, y);
+  }
+
+  function hideCard(){
+    card.style.display = 'none';
+    activeItem = null;
+  }
+
+  function positionCard(x, y){
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const padding = 16;
+      let left = x, top = y - 12;
+      const rect = card.getBoundingClientRect();
+      // keep inside viewport
+      left = Math.max(padding + rect.width/2, Math.min(window.innerWidth - padding - rect.width/2, left));
+      top  = Math.max(padding + rect.height, Math.min(window.innerHeight - padding, top));
+      card.style.left = left + 'px';
+      card.style.top  = top + 'px';
+    });
+  }
+
+  root.addEventListener('mousemove', (e) => {
+    const item = e.target.closest('.tl__item');
+    if(!item) { hideCard(); return; }
+    if (activeItem !== item) {
+      activeItem = item;
+      showCard(item, e.clientX, e.clientY);
+    } else {
+      positionCard(e.clientX, e.clientY);
+    }
+  });
+
+  root.addEventListener('mouseleave', hideCard);
+})();
+</script>
+
+</body>
 </html>

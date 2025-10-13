@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GPU Evolution Timeline</title>
+  <title>Timeline - GPU Evolution</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body class="gpu-cursor">
-  <a class="sr-only" href="#main">Skip to content</a>
+
 
   <!-- Top bar (same as index) -->
   <header class="topbar">
@@ -23,7 +24,6 @@
     <nav id="menuPanel" class="menu" aria-label="Site">
       <a href="index.html" class="menu__link">Home</a>
       <a href="timeline.html" class="menu__link" aria-current="page">Timeline</a>
-      <a href="applications.html" class="menu__link">Applications</a>
       <a href="concepts.html" class="menu__link">Key Concepts</a>
       <a href="about.html" class="menu__link">About</a>
       <a href="references.html" class="menu__link">References</a>
@@ -34,57 +34,174 @@
     <h2 class="section-title">TIMELINE</h2>
 
     <section class="tl" aria-label="GPU milestones">
-      <article class="tl__item tl__item--left">
-        <div class="tl__dot" aria-hidden="true"></div>
-        <div class="tl__card">
-          <h3 class="tl__year">1995</h3>
-          <h4 class="tl__title">3dfx Voodoo Graphics</h4>
-          <p>The Voodoo card marked the first major leap in consumer 3D acceleration and popularized dedicated graphics add-in boards.</p>
-        </div>
-      </article>
+  <!-- Era divider -->
+  <h3 class="section-title" style="margin-top:0">Early 3D Acceleration (1990s)</h3>
 
-      <article class="tl__item tl__item--right">
-        <div class="tl__dot" aria-hidden="true"></div>
-        <div class="tl__card">
-          <h3 class="tl__year">1999</h3>
-          <h4 class="tl__title">NVIDIA GeForce 256</h4>
-          <p>Coined the term “GPU” and brought hardware transform &amp; lighting, reshaping real-time 3D rendering.</p>
-        </div>
-      </article>
+  <article class="tl__item tl__item--left"
+           data-thumb="images/3dfx_voodoo.jpg"
+           data-note="Fixed-function 3D; made consumer 3D gaming take off.">
+    <div class="tl__dot" aria-hidden="true"></div>
+    <div class="tl__card">
+      <h3 class="tl__year">1995</h3>
+      <h4 class="tl__title">3dfx Voodoo Graphics</h4>
+      <p>First big consumer 3D accelerator; popularized dedicated add-in boards and Glide API.</p>
+    </div>
+  </article>
 
-      <article class="tl__item tl__item--left">
-        <div class="tl__dot" aria-hidden="true"></div>
-        <div class="tl__card">
-          <h3 class="tl__year">2006</h3>
-          <h4 class="tl__title">CUDA</h4>
-          <p>Enabled general-purpose compute on GPUs, paving the way for acceleration in AI, simulation, and data analytics.</p>
-        </div>
-      </article>
+  <article class="tl__item tl__item--right"
+           data-thumb="images/riva_tnt2.jpg"
+           data-note="Multi-texturing & better image quality before T&L era.">
+    <div class="tl__dot" aria-hidden="true"></div>
+    <div class="tl__card">
+      <h3 class="tl__year">1998</h3>
+      <h4 class="tl__title">NVIDIA RIVA TNT2</h4>
+      <p>Improved multi-texturing and fill-rate; set the stage for the GeForce line.</p>
+    </div>
+  </article>
 
-      <article class="tl__item tl__item--right">
-        <div class="tl__dot" aria-hidden="true"></div>
-        <div class="tl__card">
-          <h3 class="tl__year">2010's</h3>
-          <h4 class="tl__title">Rise of GPU</h4>
-          <p>GPUs moved beyond graphics into scientific research, crypto mining, and large-scale machine learning.</p>
-        </div>
-      </article>
+  <article class="tl__item tl__item--left"
+           data-thumb="images/geforce256.jpg"
+           data-note="First product branded 'GPU'; introduced hardware transform & lighting.">
+    <div class="tl__dot" aria-hidden="true"></div>
+    <div class="tl__card">
+      <h3 class="tl__year">1999</h3>
+      <h4 class="tl__title">NVIDIA GeForce 256</h4>
+      <p>Coined the term “GPU” and added hardware T&L, reshaping real-time 3D rendering.</p>
+    </div>
+  </article>
 
-      <article class="tl__item tl__item--left">
-        <div class="tl__dot" aria-hidden="true"></div>
-        <div class="tl__card">
-          <h3 class="tl__year">2020's</h3>
-          <h4 class="tl__title">AI Era</h4>
-          <p>Modern GPUs (e.g., RTX &amp; RDNA families) power gaming realism and the training/inference of cutting-edge AI systems.</p>
-        </div>
-      </article>
-    </section>
+  <!-- Era divider -->
+  <h3 class="section-title">Programmable Shaders (2000s)</h3>
+
+  <article class="tl__item tl__item--right"
+           data-thumb="images/radeon9700.jpg"
+           data-note="DirectX 9, fully programmable pixel shaders, big leap in fidelity.">
+    <div class="tl__dot" aria-hidden="true"></div>
+    <div class="tl__card">
+      <h3 class="tl__year">2002</h3>
+      <h4 class="tl__title">ATI Radeon 9700 Pro</h4>
+      <p>DX9 pioneer with advanced shader models; major image quality & performance jump.</p>
+    </div>
+  </article>
+
+  <article class="tl__item tl__item--left"
+           data-thumb="images/geforce8800gtx.jpg"
+           data-note="Unified shaders for graphics & compute; CUDA era begins soon after.">
+    <div class="tl__dot" aria-hidden="true"></div>
+    <div class="tl__card">
+      <h3 class="tl__year">2006</h3>
+      <h4 class="tl__title">GeForce 8800 GTX</h4>
+      <p>First widely adopted unified shader architecture; huge step for flexibility and performance.</p>
+    </div>
+  </article>
+
+  <article class="tl__item tl__item--right"
+           data-thumb="images/cuda.jpg"
+           data-note="General-purpose GPU compute unlocks AI, simulation, analytics.">
+    <div class="tl__dot" aria-hidden="true"></div>
+    <div class="tl__card">
+      <h3 class="tl__year">2006</h3>
+      <h4 class="tl__title">CUDA</h4>
+      <p>Enabled general-purpose compute on GPUs, paving the way for acceleration in AI and HPC.</p>
+    </div>
+  </article>
+
+  <!-- Era divider -->
+  <h3 class="section-title">GPU & Efficiency (2010s)</h3>
+
+  <article class="tl__item tl__item--left"
+           data-thumb="images/gcn.jpg"
+           data-note="Compute-first architecture; strong OpenCL/HSA push.">
+    <div class="tl__dot" aria-hidden="true"></div>
+    <div class="tl__card">
+      <h3 class="tl__year">2012</h3>
+      <h4 class="tl__title">AMD GCN</h4>
+      <p>Graphics Core Next architecture optimized for parallel compute and modern APIs.</p>
+    </div>
+  </article>
+
+  <article class="tl__item tl__item--right"
+           data-thumb="images/maxwell.jpg"
+           data-note="Big perf-per-watt gains; pushed efficient 4K gaming.">
+    <div class="tl__dot" aria-hidden="true"></div>
+    <div class="tl__card">
+      <h3 class="tl__year">2014</h3>
+      <h4 class="tl__title">NVIDIA Maxwell</h4>
+      <p>Architectural focus on efficiency; set the tone for cooler, quieter high-end GPUs.</p>
+    </div>
+  </article>
+
+  <article class="tl__item tl__item--left"
+           data-thumb="images/tensor_dl.jpg"
+           data-note="Deep learning training takes off as frameworks embrace GPUs.">
+    <div class="tl__dot" aria-hidden="true"></div>
+    <div class="tl__card">
+      <h3 class="tl__year">2016</h3>
+      <h4 class="tl__title">DL Boom</h4>
+      <p>GPU-accelerated deep learning gains momentum with cuDNN, TensorFlow, and PyTorch.</p>
+    </div>
+  </article>
+
+  <!-- Era divider -->
+  <h3 class="section-title">Ray Tracing & AI Era (2020s)</h3>
+
+  <article class="tl__item tl__item--right"
+           data-thumb="images/rtx.jpg"
+           data-note="Real-time ray tracing and DLSS bring cinema-style lighting to games.">
+    <div class="tl__dot" aria-hidden="true"></div>
+    <div class="tl__card">
+      <h3 class="tl__year">2018–2020</h3>
+      <h4 class="tl__title">RTX & Hardware RT</h4>
+      <p>Dedicated ray-tracing hardware and AI upscaling (DLSS) redefine real-time graphics.</p>
+    </div>
+  </article>
+
+  <article class="tl__item tl__item--left"
+           data-thumb="images/rdna.jpg"
+           data-note="Perf-per-watt focus with modern cache design; competitive ray tracing.">
+    <div class="tl__dot" aria-hidden="true"></div>
+    <div class="tl__card">
+      <h3 class="tl__year">2020–2023</h3>
+      <h4 class="tl__title">AMD RDNA / RDNA 2/3</h4>
+      <p>New architectures with improved efficiency and RT support; strong console lineage.</p>
+    </div>
+  </article>
+
+  <article class="tl__item tl__item--right"
+           data-thumb="images/ai_accel.jpg"
+           data-note="Specialized cores and software stacks accelerate training & inference.">
+    <div class="tl__dot" aria-hidden="true"></div>
+    <div class="tl__card">
+      <h3 class="tl__year">2020s</h3>
+      <h4 class="tl__title">AI Acceleration</h4>
+      <p>Tensor and AI cores become standard; GPUs drive LLMs, vision, and generative tools.</p>
+    </div>
+  </article>
+
+  <article class="tl__item tl__item--left"
+           data-thumb="images/future.jpg"
+           data-note="Chiplets, HBM, multi-die designs, and smarter scheduling on the horizon.">
+    <div class="tl__dot" aria-hidden="true"></div>
+    <div class="tl__card">
+      <h3 class="tl__year">Next</h3>
+      <h4 class="tl__title">What’s Coming</h4>
+      <p>Next-generation GPUs will utilize modular chiplet architectures, ultra-high-bandwidth stacked memory, and tightly integrated hardware-software designs to provide smarter, faster and more power efficient performance for AI and data-intensive workloads.</p>
+    </div>
+    
+  </article>
+  
+</section>
+<body>
+  <div class="to-top-wrap">
+      <button id="toTop" class="to-top" aria-label="Back to top">↑</button>
+    </div>
+  <body>
   </main>
+  
+  
 
   <footer class="site-footer">
-    <small>
-      <b>This is a class project developed in IT 1103.</b>
-    </small>
+    <a href= "https://ksuweb.github.io/IT3203/"> <small><b>This is a class project developed in IT 3203.</b></small></a>
   </footer>
 
   <!-- Animated GPU cursor -->
@@ -92,30 +209,95 @@
 
   <!-- Same tiny script as index -->
   <script>
-    // Menu
-    const btn = document.getElementById('menuBtn');
-    const panel = document.getElementById('menuPanel');
-    function closeMenu(){ panel.classList.remove('menu--open'); btn.setAttribute('aria-expanded','false'); }
-    btn.addEventListener('click', () => {
-      const open = panel.classList.toggle('menu--open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    document.addEventListener('click', e => { if(!panel.contains(e.target) && !btn.contains(e.target)) closeMenu(); });
-    document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
+  // ===== Menu (unchanged) =====
+  const btn = document.getElementById('menuBtn');
+  const panel = document.getElementById('menuPanel');
+  function closeMenu(){ panel.classList.remove('menu--open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', () => {
+    const open = panel.classList.toggle('menu--open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('click', e => { if(!panel.contains(e.target) && !btn.contains(e.target)) closeMenu(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
 
-    // Cursor
-    const gpu = document.getElementById('gpuCursor');
+  // ===== Cursor follower (unchanged) =====
+  const gpu = document.getElementById('gpuCursor');
+  let raf;
+  window.addEventListener('mousemove', e => {
+    if(raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => { gpu.style.left = e.clientX+'px'; gpu.style.top = e.clientY+'px'; });
+  }, {passive:true});
+  const hoverSel = 'a,button,.menu-btn,.menu__link';
+  const setHover = on => document.body.classList.toggle('cursor-hover', on);
+  document.addEventListener('pointerover', e => { if(e.target.closest(hoverSel)) setHover(true); });
+  document.addEventListener('pointerout',  e => { if(e.target.closest(hoverSel)) setHover(false); });
+  document.addEventListener('focusin',  e => { if(e.target.matches(hoverSel)) setHover(true); });
+  document.addEventListener('focusout', e => { if(e.target.matches(hoverSel)) setHover(false); });
+
+  // ===== Timeline scroll-reveal (fallback: no IntersectionObserver needed) =====
+  (function(){
+    const items = Array.from(document.querySelectorAll('.tl__item'));
+    if(!items.length) return;
+
+    // Mark page as reveal-ready so CSS hides items
+    document.body.classList.add('reveal-ready');
+
+    // Reveal check using simple geometry
+    function revealCheck(){
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const threshold = vh * 0.82; // when top is within ~80% of viewport
+      for(const el of items){
+        if(el.classList.contains('is-visible')) continue;
+        const r = el.getBoundingClientRect();
+        if(r.top < threshold && r.bottom > 0){
+          el.classList.add('is-visible');
+        }
+      }
+    }
+
+    // Run now and on events
+    revealCheck();
+    window.addEventListener('scroll', revealCheck, {passive:true});
+    window.addEventListener('resize', revealCheck, {passive:true});
+    window.addEventListener('load', revealCheck);
+
+    // Extra safety ticks (handles fonts/images shifting layout)
+    setTimeout(revealCheck, 80);
+    setTimeout(revealCheck, 250);
+    setTimeout(revealCheck, 600);
+  })();
+</script>
+
+<script>
+  // ===== A) GPU Glow: update CSS vars from cursor (works with your cursor code) =====
+  (function(){
+    const root = document.documentElement;
     let raf;
-    window.addEventListener('mousemove', e => {
+    function onMove(e){
       if(raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => { gpu.style.left = e.clientX+'px'; gpu.style.top = e.clientY+'px'; });
-    }, {passive:true});
-    const hoverSel = 'a,button,.menu-btn,.menu__link';
-    const setHover = on => document.body.classList.toggle('cursor-hover', on);
-    document.addEventListener('pointerover', e => { if(e.target.closest(hoverSel)) setHover(true); });
-    document.addEventListener('pointerout',  e => { if(e.target.closest(hoverSel)) setHover(false); });
-    document.addEventListener('focusin',  e => { if(e.target.matches(hoverSel)) setHover(true); });
-    document.addEventListener('focusout', e => { if(e.target.matches(hoverSel)) setHover(false); });
+      const x = e.clientX, y = e.clientY;
+      raf = requestAnimationFrame(()=>{
+        root.style.setProperty('--glow-x', x + 'px');
+        root.style.setProperty('--glow-y', y + 'px');
+      });
+    }
+    window.addEventListener('mousemove', onMove, {passive:true});
+  })();
+  // ===== Back-to-top button =====
+    (function(){
+      const btn = document.getElementById('toTop');
+      if(!btn) return;
+      const onScroll = () => {
+        btn.classList.toggle('to-top--show', (window.scrollY || document.documentElement.scrollTop) > 400);
+      };
+      btn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+    })();
   </script>
+</script>
+
+
+  
 </body>
 </html>
