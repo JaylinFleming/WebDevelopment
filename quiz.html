@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GPU Quiz — Self Assessment</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="gpu-cursor">
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel" aria-label="Open site menu">
+      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <h1 class="page-title">GPU Knowledge Check</h1>
+
+    <nav id="menuPanel" class="menu" aria-label="Site">
+      <a href="index.html" class="menu__link">Home</a>
+      <a href="timeline.html" class="menu__link">Timeline</a>
+      <a href="concepts.html" class="menu__link">Key Concepts</a>
+      <a href="about.html" class="menu__link">About</a>
+      <a href="references.html" class="menu__link">References</a>
+      <a href="quiz.html" class="menu__link" aria-current="page">Quiz</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap quiz">
+    <section class="quiz-intro">
+      <h2 class="section-title">Test Your Knowledge of GPUs</h2>
+      <p class="body">
+        After reading about the history and impact of GPUs, use this quiz to check your understanding.
+        Submit to see which questions you got right or wrong, your total score, and the correct answers.
+      </p>
+    </section>
+
+    <section aria-label="GPU Quiz" class="quiz-card">
+      <form id="gpuQuiz" novalidate>
+        <!-- Q1: Fill in the blank -->
+        <fieldset class="quiz-question">
+          <legend class="quiz-question__title">1. Fill in the blank</legend>
+          <p class="quiz-question__text">
+            The company that marketed the GeForce 256 as the world's first "GPU" is <strong>__________</strong>.
+          </p>
+          <label class="quiz-label" for="q1">Your answer:</label>
+          <input type="text" id="q1" name="q1" class="quiz-input" placeholder="Type the company name" />
+        </fieldset>
+
+        <!-- Q2: Single choice -->
+        <fieldset class="quiz-question">
+          <legend class="quiz-question__title">2. Single choice</legend>
+          <p class="quiz-question__text">What does <strong>GPU</strong> stand for?</p>
+          <div class="quiz-options">
+            <label class="quiz-option">
+              <input type="radio" name="q2" value="a" /> General Processing Unit
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q2" value="b" /> Graphics Processing Unit
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q2" value="c" /> Graphical Programming Utility
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q2" value="d" /> Game Performance Unit
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Q3: Single choice -->
+        <fieldset class="quiz-question">
+          <legend class="quiz-question__title">3. Single choice</legend>
+          <p class="quiz-question__text">
+            Which of the following is a major modern use of GPUs besides gaming?
+          </p>
+          <div class="quiz-options">
+            <label class="quiz-option">
+              <input type="radio" name="q3" value="a" /> Writing documents and emails
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q3" value="b" /> Machine learning and AI workloads
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q3" value="c" /> Controlling the power supply
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q3" value="d" /> Managing operating system updates
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Q4: Single choice -->
+        <fieldset class="quiz-question">
+          <legend class="quiz-question__title">4. Single choice</legend>
+          <p class="quiz-question__text">
+            GPUs are especially good at which type of computation?
+          </p>
+          <div class="quiz-options">
+            <label class="quiz-option">
+              <input type="radio" name="q4" value="a" /> Long single-threaded tasks with lots of branching
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q4" value="b" /> Highly parallel operations on large amounts of data
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q4" value="c" /> Disk and network input/output
+            </label>
+            <label class="quiz-option">
+              <input type="radio" name="q4" value="d" /> Running BIOS firmware
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Q5: Multi-select -->
+        <fieldset class="quiz-question">
+          <legend class="quiz-question__title">5. Multi-select</legend>
+          <p class="quiz-question__text">
+            Which of the following are advantages of using GPUs for general-purpose (GPGPU) computing?
+            <span class="quiz-hint">(Select all that apply)</span>
+          </p>
+          <div class="quiz-options quiz-options--multi">
+            <label class="quiz-option">
+              <input type="checkbox" name="q5" value="a" /> Many cores designed for parallel workloads
+            </label>
+            <label class="quiz-option">
+              <input type="checkbox" name="q5" value="b" /> High throughput on data-parallel tasks
+            </label>
+            <label class="quiz-option">
+              <input type="checkbox" name="q5" value="c" /> Extremely low latency for a single thread
+            </label>
+            <label class="quiz-option">
+              <input type="checkbox" name="q5" value="d" /> No need to optimize programs at all
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Actions -->
+        <div class="quiz-actions">
+          <button type="submit" class="btn quiz-submit">Submit Quiz</button>
+          <button type="button" id="quizReset" class="btn btn--ghost">Reset / Retake</button>
+        </div>
+      </form>
+
+      <!-- Results area -->
+      <section id="quizResults" class="quiz-results" aria-live="polite" hidden>
+        <div class="quiz-results__summary">
+          <p id="quizScore" class="quiz-score"></p>
+          <p id="quizPassFail" class="quiz-passfail"></p>
+        </div>
+        <div id="quizDetails" class="quiz-results__details"></div>
+      </section>
+    </section>
+  </main>
+
+  <!-- ===== Menu Toggle Script (for the three-line icon) ===== -->
+  <script>
+    (function() {
+      const btn = document.getElementById('menuBtn');
+      const panel = document.getElementById('menuPanel');
+      if (!btn || !panel) return;
+
+      const closeMenu = () => {
+        panel.classList.remove('menu--open');
+        btn.setAttribute('aria-expanded', 'false');
+      };
+
+      btn.addEventListener('click', () => {
+        const open = panel.classList.toggle('menu--open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!panel.contains(e.target) && !btn.contains(e.target)) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeMenu();
+        }
+      });
+    })();
+  </script>
+
+  <!-- ===== Quiz Logic Script ===== -->
+  <script>
+    (function () {
+      const form = document.getElementById('gpuQuiz');
+      const resultsSection = document.getElementById('quizResults');
+      const scoreEl = document.getElementById('quizScore');
+      const passFailEl = document.getElementById('quizPassFail');
+      const detailsEl = document.getElementById('quizDetails');
+      const resetBtn = document.getElementById('quizReset');
+
+      if (!form) return;
+
+      // Correct answers
+      const answers = {
+        q1: ['nvidia'],           // Accept any case of "NVIDIA"
+        q2: 'b',                  // Graphics Processing Unit
+        q3: 'b',                  // Machine learning and AI workloads
+        q4: 'b',                  // Highly parallel operations
+        q5: ['a', 'b']            // Multi-select: A and B only
+      };
+
+      const pointsPerQuestion = 1;
+      const totalQuestions = 5;
+      const maxScore = totalQuestions * pointsPerQuestion;
+      const passingScore = 3; // 3 out of 5 to pass
+
+      function normalizeText(value) {
+        return value.trim().toLowerCase();
+      }
+
+      function handleSubmit(event) {
+        event.preventDefault();
+
+        let score = 0;
+        const perQuestionFeedback = [];
+
+        // Q1: fill in the blank
+        const q1Raw = form.q1.value || '';
+        const q1Input = normalizeText(q1Raw);
+        const q1Correct = answers.q1.some(ans => q1Input === ans);
+        if (q1Correct) score += pointsPerQuestion;
+        perQuestionFeedback.push({
+          number: 1,
+          correct: q1Correct,
+          correctAnswer: 'NVIDIA',
+          userAnswer: q1Raw || '(no answer)'
+        });
+
+        // Helper for radio questions
+        function checkRadio(name, correctValue) {
+          const selected = form.querySelector('input[name="' + name + '"]:checked');
+          const userVal = selected ? selected.value : null;
+          const isCorrect = userVal === correctValue;
+          if (isCorrect) score += pointsPerQuestion;
+          return { value: userVal, isCorrect };
+        }
+
+        // Q2
+        const q2 = checkRadio('q2', answers.q2);
+        perQuestionFeedback.push({
+          number: 2,
+          correct: q2.isCorrect,
+          correctAnswer: 'Graphics Processing Unit',
+          userAnswer: q2.value ? 'Option ' + q2.value.toUpperCase() : '(no answer)'
+        });
+
+        // Q3
+        const q3 = checkRadio('q3', answers.q3);
+        perQuestionFeedback.push({
+          number: 3,
+          correct: q3.isCorrect,
+          correctAnswer: 'Machine learning and AI workloads',
+          userAnswer: q3.value ? 'Option ' + q3.value.toUpperCase() : '(no answer)'
+        });
+
+        // Q4
+        const q4 = checkRadio('q4', answers.q4);
+        perQuestionFeedback.push({
+          number: 4,
+          correct: q4.isCorrect,
+          correctAnswer: 'Highly parallel operations on large amounts of data',
+          userAnswer: q4.value ? 'Option ' + q4.value.toUpperCase() : '(no answer)'
+        });
+
+        // Q5: multi-select
+        const selectedCheckboxes = Array.from(form.querySelectorAll('input[name="q5"]:checked'));
+        const selectedValues = selectedCheckboxes.map(cb => cb.value).sort();
+        const correctValues = answers.q5.slice().sort();
+
+        const q5Correct =
+          selectedValues.length === correctValues.length &&
+          selectedValues.every((v, i) => v === correctValues[i]);
+
+        if (q5Correct) score += pointsPerQuestion;
+
+        const selectedLabels = selectedCheckboxes.length
+          ? selectedCheckboxes.map(cb => cb.parentElement.textContent.trim())
+          : ['(no answer)'];
+
+        perQuestionFeedback.push({
+          number: 5,
+          correct: q5Correct,
+          correctAnswer: 'A and B — many cores for parallel workloads and high throughput on data-parallel tasks',
+          userAnswer: selectedLabels.join('; ')
+        });
+
+        // Overall summary
+        scoreEl.textContent = `Total Score: ${score} / ${maxScore}`;
+        scoreEl.classList.toggle('quiz-score--pass', score >= passingScore);
+        scoreEl.classList.toggle('quiz-score--fail', score < passingScore);
+
+        const passed = score >= passingScore;
+        passFailEl.textContent = passed
+          ? 'Result: Pass — great job! ✅'
+          : 'Result: Fail — review the content and try again. ❌';
+        passFailEl.classList.toggle('quiz-passfail--pass', passed);
+        passFailEl.classList.toggle('quiz-passfail--fail', !passed);
+
+        // Per-question details
+        detailsEl.innerHTML = perQuestionFeedback.map(item => `
+          <article class="quiz-result">
+            <h3 class="quiz-result__title">Question ${item.number}</h3>
+            <p class="quiz-result__status ${item.correct ? 'quiz-result__status--correct' : 'quiz-result__status--incorrect'}">
+              ${item.correct ? 'Correct' : 'Incorrect'}
+            </p>
+            <p class="quiz-result__text"><strong>Your answer:</strong> ${item.userAnswer}</p>
+            <p class="quiz-result__text"><strong>Correct answer:</strong> ${item.correctAnswer}</p>
+          </article>
+        `).join('');
+
+        resultsSection.hidden = false;
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function handleReset() {
+        form.reset();
+        resultsSection.hidden = true;
+        detailsEl.innerHTML = '';
+        scoreEl.textContent = '';
+        passFailEl.textContent = '';
+        scoreEl.classList.remove('quiz-score--pass', 'quiz-score--fail');
+        passFailEl.classList.remove('quiz-passfail--pass', 'quiz-passfail--fail');
+      }
+
+      form.addEventListener('submit', handleSubmit);
+      resetBtn.addEventListener('click', handleReset);
+    })();
+  </script>
+</body>
+</html>
